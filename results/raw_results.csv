@@ -1,0 +1,2 @@
+algorithm,dataset,customers,vehicle_capacity,runtime_ms,total_distance,number_of_routes
+Nearest Neighbor Heuristic,sample_customers.csv,10,40,0.379,365.13,4
