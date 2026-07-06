@@ -2,10 +2,10 @@
 
 ## Team Members
 
-- Mandy Jones
-- Tomu Yamashita
-- Tristen Martin
-- Charles Davis
+- [Mandy Jones](https://github.com/search?q=Mandy+Jones&type=users)
+- [Tomu Yamashita](https://github.com/search?q=Tomu+Yamashita&type=users)
+- [Tristen Martin](https://github.com/search?q=Tristen+Martin&type=users)
+- [Charles Davis](https://github.com/Charliedavis-cs)
 
 ## Project Description
 
@@ -17,9 +17,27 @@ This repository contains the CSC 2400 Algorithms term project for comparing algo
 - Clarke-Wright Savings Algorithm
 - Harmony Search
 
+For checkpoint 2, the Nearest Neighbor Heuristic is implemented as the working baseline. Clarke-Wright Savings and Harmony Search are planned next so the final project can compare a simple greedy heuristic, a classical savings-based heuristic, and a metaheuristic approach.
+
 ## Dataset Plan
 
 The project will use CVRPLIB benchmark instances for algorithm comparison. CVRPLIB provides standard CVRP datasets that can be used to compare solution quality, route count, runtime, and scalability across different algorithms. A small custom CSV dataset is included now so the repository has working starter code for checkpoint 2.
+
+The current sample dataset is stored in `data/sample_customers.csv`. Customer `0` is the depot, and every other row represents one customer with `x` coordinate, `y` coordinate, and demand.
+
+## Experimentation Plan
+
+The experiment runner translates the project's comparison plan into code by loading a dataset, running a CVRP algorithm, measuring runtime, calculating total distance, and recording the number of vehicle routes. Each algorithm will eventually be run on the same datasets and evaluated using the same output columns:
+
+- `algorithm`
+- `dataset`
+- `customers`
+- `vehicle_capacity`
+- `runtime_ms`
+- `total_distance`
+- `number_of_routes`
+
+This makes it possible to compare algorithms using consistent metrics. For checkpoint 2, this process is implemented for the Nearest Neighbor baseline.
 
 ## Repository Structure
 
@@ -51,3 +69,15 @@ The current experiment records:
 - Total route distance
 - Number of vehicle routes
 
+The starter dataset run currently produces:
+
+- Vehicle capacity: `40`
+- Number of customers served: `10`
+- Number of routes: `4`
+- Total route distance: `365.13`
+
+Results are saved in `results/raw_results.csv`.
+
+## Checkpoint Status
+
+The repository is ready for checkpoint 2 submission. It contains complete starter functions for the implemented Nearest Neighbor method, a runnable experiment script, a sample dataset, generated results, and a checkpoint report in `reports/checkpoint_2_report.md`.
