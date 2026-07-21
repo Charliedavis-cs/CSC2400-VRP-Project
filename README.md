@@ -9,7 +9,7 @@
 
 ## Project Description
 
-This repository contains the CSC 2400 Algorithms term project for comparing algorithms for the Capacitated Vehicle Routing Problem (CVRP). In CVRP, a set of customers with known demands must be served by vehicles that start and end at a depot. Each vehicle has a fixed capacity, and the goal is to create routes that serve all customers while minimizing total travel distance and respecting capacity limits.
+This repository contains the CSC 2400 Algorithms project for comparing algorithms for the Capacitated Vehicle Routing Problem. In this problem a set of customers with known demands must be served by vehicles that start and end at a place. Each vehicle has a fixed capacity, and the goal is to create routes that serve all customers while minimizing total travel distance and respecting capacity limits.
 
 ## Algorithms Being Compared
 
@@ -17,11 +17,9 @@ This repository contains the CSC 2400 Algorithms term project for comparing algo
 - Clarke-Wright Savings Algorithm
 - Harmony Search
 
-For checkpoint 2, the Nearest Neighbor Heuristic is implemented as the working baseline. Clarke-Wright Savings and Harmony Search are planned next so the final project can compare a simple greedy heuristic, a classical savings-based heuristic, and a metaheuristic approach.
+For checkpoint 2, the Nearest Neighbor Heuristic is implemented as the working baseline. Clarke-Wright Savings and Harmony Search are planned next so the final project can compare a simple greedy heuristic, a classical savings based heuristic, and a metaheuristic approach.
 
 ## Dataset Plan
-
-The project will use CVRPLIB benchmark instances for algorithm comparison. CVRPLIB provides standard CVRP datasets that can be used to compare solution quality, route count, runtime, and scalability across different algorithms. A small custom CSV dataset is included now so the repository has working starter code for checkpoint 2.
 
 The current sample dataset is stored in `data/sample_customers.csv`. Customer `0` is the depot, and every other row represents one customer with `x` coordinate, `y` coordinate, and demand.
 
@@ -78,6 +76,3 @@ The starter dataset run currently produces:
 
 Results are saved in `results/raw_results.csv`.
 
-## Checkpoint Status
-
-The repository is ready for checkpoint 2 submission. It contains complete starter functions for the implemented Nearest Neighbor method, a runnable experiment script, a sample dataset, generated results, and a checkpoint report in `reports/checkpoint_2_report.md`.
