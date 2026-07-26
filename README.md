@@ -77,4 +77,4 @@ tested before making broad conclusions.
 - [CVRPLIB](http://vrp.atd-lab.inf.puc-rio.br/index.php/en/)
 - Python standard library documentation.
 - OpenAIs ChatGPT and Codex were used for project planning,
-  debugging suggestions, experiment organization, and editing. 
+  debugging suggestions, and experiment organization.
