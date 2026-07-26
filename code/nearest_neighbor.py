@@ -1,66 +1,48 @@
-"""Nearest Neighbor heuristic for CVRP"""
+"""Nearest Neighbor heuristic for the CVRP."""
 
-from cvrp_utils import calculate_total_distance, distance
+from cvrp_utils import distance
+from validators import validate_customer_data
 
 
 def nearest_neighbor_cvrp(customers, vehicle_capacity, depot_id=0):
-
-    if vehicle_capacity <= 0:
-        raise ValueError("Vehicle cap > 8")
-
-    if depot_id not in customers:
-        raise ValueError(
-            f"Depot ID {depot_id} was not found in the customer data"
-        )
-
-    for customer_id, customer in customers.items():
-        demand = customer["demand"]
-
-        if demand < 0:
-            raise ValueError(
-                f"Customer {customer_id} has negative demand"
-            )
-
-        if customer_id != depot_id and demand > vehicle_capacity:
-            raise ValueError(
-                f"Customer {customer_id} demand {demand} exceeds "
-                f"vehicle capacity {vehicle_capacity}"
-            )
+    """Build routes by repeatedly choosing the closest customer that fits."""
+    validate_customer_data(customers, vehicle_capacity, depot_id)
 
     unvisited = set(customers) - {depot_id}
     routes = []
+    operation_count = 0
 
     while unvisited:
-        route = []
+        current_route = []
         remaining_capacity = vehicle_capacity
-        current_customer = customers[depot_id]
+        current_id = depot_id
 
         while True:
-            feasible_customers = [
-                customer_id
-                for customer_id in unvisited
-                if customers[customer_id]["demand"] <= remaining_capacity
-            ]
+            nearest_id = None
+            nearest_distance = None
 
-            if not feasible_customers:
+            # Check every customer that can still fit in this truck
+            for customer_id in sorted(unvisited):
+                operation_count += 1
+                demand = customers[customer_id]["demand"]
+                if demand > remaining_capacity:
+                    continue
+
+                current_distance = distance(
+                    customers[current_id], customers[customer_id]
+                )
+                if nearest_distance is None or current_distance < nearest_distance:
+                    nearest_id = customer_id
+                    nearest_distance = current_distance
+
+            if nearest_id is None:
                 break
 
-            next_customer_id = min(
-                feasible_customers,
-                key=lambda customer_id: (
-                    distance(
-                        current_customer,
-                        customers[customer_id],
-                    ),
-                    customer_id,
-                ),
-            )
+            current_route.append(nearest_id)
+            remaining_capacity -= customers[nearest_id]["demand"]
+            current_id = nearest_id
+            unvisited.remove(nearest_id)
 
-            route.append(next_customer_id)
-            remaining_capacity -= customers[next_customer_id]["demand"]
-            current_customer = customers[next_customer_id]
-            unvisited.remove(next_customer_id)
+        routes.append(current_route)
 
-        routes.append(route)
-
-    return routes
+    return routes, operation_count
